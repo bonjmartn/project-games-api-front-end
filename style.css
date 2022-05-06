@@ -1,0 +1,452 @@
+/***********************
+    Reset
+************************/
+* {
+    vertical-align: baseline;
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, blockquote, form, ul, ol, dl {
+    margin: 20px 0;
+}
+
+li, dd, blockquote {
+    margin-left: 1em;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/***********************
+    Colors
+    red             #FF0000
+    green           #7AC943
+    blue            #3FA9F5
+    dark gray       #333333
+    med gray        #E6E6E6
+    light gray      #F2F2F2
+************************/
+
+.color-blue {
+    color: #3FA9F5;
+}
+
+.color-green {
+    color: #7AC943;
+}
+
+.color-red {
+    color: #FF0000;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+a, a:visited {
+    color: #3FA9F5;
+}
+
+a:hover {
+    color: #7AC943;
+}
+
+a:active {
+    color: #FF0000;
+}
+
+/***********************
+    Fonts and Text
+************************/
+
+h1, h2, h3, h4, h5, h6, p, blockquote, li, a, div, span {
+    font-family: 'Roboto', sans-serif;
+}
+
+p, a, li, div, span, blockquote {
+    font-size: 16px;
+}
+
+p, li, div, span, blockquote {
+    color: #333;
+}
+
+/***********************
+    Global Areas
+************************/
+
+header {
+    border-bottom: 2px #3FA9F5 solid;
+    padding: 1em;
+}
+
+.container {
+    margin: 0 auto;
+    width: 90%;
+    display: block;
+    max-width: 1920px;
+}
+
+hr {
+    border-top: 2px dashed #7AC943;
+    margin: 1em 0 2em;
+}
+
+footer {
+    border-top: 2px #7AC943 solid;
+    margin-top: 2em;
+    padding: 1em 0;
+    text-align: center;
+}
+
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+/***********************
+    Nav
+************************/
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: 90%;
+}
+
+nav img {
+    width: 270px;
+}
+
+.nav-links {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+}
+
+.nav-links a {
+    padding-right: 1em;
+}
+
+/***********************
+    Home
+************************/
+
+.home-top-right-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.home-top-right-box img {
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+.home-boxes-wrapper, .home-top-wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.home-docs-box, .home-examples-box,
+.home-top-left-box {
+    padding: 10px 20px 40px 20px;
+    margin: 0 20px;
+    text-align: center;
+}
+
+.home-top-right-box {
+    padding: 10px 0 40px 0;
+}
+
+@media only screen and (min-width: 600px) and (max-width: 800px) {
+	.home-top-right-box {
+        grid-template-columns: 100%;
+        text-align: center;
+    }
+    .home-top-wrapper {
+        grid-template-columns: 75% 25%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+	.home-boxes-wrapper, .home-top-wrapper {
+        grid-template-columns: 100%;
+    }
+    .home-examples-box {
+        margin-top: 20px
+    }
+    .home-top-right-box img {
+        max-width: 90%;
+        margin-top: 0;
+    }
+}
+
+.home-docs-box {
+    border: 2px solid #3FA9F5;
+}
+
+.home-examples-box {
+    border: 2px solid #7AC943;
+}
+
+.home-docs-box p, .home-examples-box p {
+    margin-bottom: 2.5em;
+}
+
+a.home-button {
+    border: 2px solid #FF0000;
+    padding: 10px;
+    color: #FF0000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a.home-button:hover {
+    border: 2px solid #3FA9F5;
+    color: #3FA9F5;
+}
+
+/***********************
+    Documentation
+************************/
+
+.endpoint-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.endpoint {
+    font-size: 1.1em;
+    font-weight: 500;
+    background-color: #E6E6E6;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+}
+
+.get {
+    background-color: #3FA9F5;
+    color: #fff;
+    padding: 0.5em;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+.clipboard img {
+    width: 24px;
+    margin-right: 0.5em;
+}
+
+.clipboard img:hover {
+    cursor: pointer;
+}
+
+.tooltip {
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    animation-duration: 5s;
+    animation-fill-mode: both;
+}
+
+.show {
+    visibility: visible;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+@keyframes fade-out {
+    0% {opacity: 1;}
+    100% {opacity: 0;} 
+} 
+
+.fade-out {
+    animation-name: fade-out;
+ }
+
+thead {
+    font-weight: 500;
+    text-align: left;
+    background-color: #3FA9F5;
+    color: #fff;
+}
+
+td, th {
+    padding: 1em 3em 1em 1em;
+}
+
+td:first-child {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+tr > td:last-child {
+    font-style: italic;
+}
+
+tr:nth-child(even) {
+    background-color: #F2F2F2;
+}
+
+pre.json {
+    background-color: #F2F2F2;
+    font-family: 'Ubuntu Mono', monospace;
+    padding: 0.5em;
+    max-width: 800px;
+    overflow-x: auto;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+
+.grid-sidebar {
+    padding-right: 2.5em;
+}
+
+@media only screen and (max-width: 800px) {
+	.grid-container {
+        grid-template-columns: 100%;
+    }
+}
+
+/***********************
+    Examples
+************************/
+
+.language-javascript {
+    max-width: 650px;
+    overflow-x: auto;
+}
+
+.button {
+    padding: 1em;
+    border-radius: 5px;
+    background-color: #7AC943;
+    color: #fff;
+    margin: 0.5em 0;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 3px 6px 0 rgba(0,0,0,0.2);
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+#two-cards img {
+    margin-right: 1em;
+    height: 275px;
+}
+
+#two-cards {
+    height: 275px;
+    padding-bottom: 1em;
+}
+
+.scrambled-words {
+    font-weight: bold;
+}
+
+#original-word {
+    color: #7AC943;
+}
+
+#shuffled-word {
+    color: #FF0000;
+}
+
+#original-word, #shuffled-word {
+    font-size: 1.5em;
+    letter-spacing: 0.25em;
+    padding-left: 1em;
+}
+
+#five-dice {
+    min-height: 150px;
+}
+
+#dice-total {
+    font-weight: bold;
+    color: #3FA9F5;
+    font-size: 1.5em;
+}
+
+/***********************
+    About
+************************/
+
+#about-playing-cards img,
+#about-tarot-cards img {
+    width: 200px;
+    max-width: 100%;
+}
+
+#about-coins img {
+    max-width: 100%;
+}
+
+#about-words {
+    font-weight: bold;
+    color: #3FA9F5;
+    font-size: 1.5em;
+}
+
+/***********************
+    Other Media Queries
+************************/
+
+@media only screen and (max-width: 500px) {
+    nav img {
+        width: 140px;
+    }
+    .endpoint-wrapper {
+        flex-flow: row wrap;
+    }
+    .clipboard {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 600px) {
+    nav img {
+        width: 200px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    td, th {
+        padding: 0.8em;
+    }
+    .endpoint {
+        font-size: 1em;
+    }
+    .sticky {
+        position: relative;
+    }
+    .contents {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .contents p {
+        margin: 0 1em 0.5em 0;
+    }
+    .about-sidebar {
+        display: none;
+    }  
+}

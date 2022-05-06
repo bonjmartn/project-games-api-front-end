@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- main css -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="https://www.projectgamesapi.xyz/highlight/styles/atom-one-light.min.css">
+  <script src="https://www.projectgamesapi.xyz/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+   
+  <title>Project Games API | Examples</title>
+</head>
+<body>
+  <header>
+  <nav>
+    <a href="https://www.projectgamesapi.xyz/index.html"><img src="https://www.projectgamesapi.xyz/img/logo-project-games-api.svg"></a>
+    <div class="nav-links">
+    <a href="https://www.projectgamesapi.xyz/documentation.html">Docs</a>
+    <a href="https://www.projectgamesapi.xyz/examples.html">Examples</a>
+    <a href="https://www.projectgamesapi.xyz/about.html">About</a>
+    </div>
+  </nav>
+  </header>
+
+  <div class="container">
+    <div class="grid-container">
+      <div class="grid-sidebar">
+        <div class="sticky">
+        <h3>Contents</h3>
+            <!-- **********************-->
+            <!-- Contents Links        -->
+            <!-- **********************-->
+            <div class="contents">
+                <p><a href="#example-1">Example 1: Get All Dice</a></p>
+                <p><a href="#example-2">Example 2: Get Two Random Cards</a></p>
+                <p><a href="#example-3">Example 3: Shuffle a Random Word</a></p>
+                <p><a href="#example-4">Example 4: Draw One Tarot Card</a></p>
+                <p><a href="#example-5">Example 5: Get Coins and Total</a></p>
+                <p><a href="#example-6">Example 6: Get Dice and Total</a></p>
+            </div>
+        </div>
+      </div><!-- end sidebar -->
+      <div class="grid-main">
+        <h1>Examples</h1>
+        <p>These examples use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">JavaScript Fetch API</a>. Each example connects to one of the API's endpoints to use the JSON response to display resources from the database.</p>
+        <p>You don't necessarily have to use the API in this exact way. These examples were developed as ideas that could be built upon to create games. You could use these as a starting point or do something else entirely.</p>
+
+        <hr>
+
+        <!-- **********************-->
+        <!-- Example 1             -->
+        <!-- **********************-->
+
+        <h2 id="example-1">Example 1: Get All Dice</h2>
+        <p>This is a basic example of connecting to one of the "Get All" endpoints, looping through the JSON response, and displaying all available resources on the page.</p>
+
+        <h3>JavaScript</h3>
+        
+        <pre><code class="language-javascript">// variable for a div in the HTML with an id of 'all-dice'
+const diceDiv = document.getElementById('all-dice');
+
+// connect to dice endpoint
+fetch('https://api.projectgamesapi.xyz/v1/dice')
+    .then(response => response.json())
+    .then(json => {
+        // this console.log is useful to see the json response
+        console.log(json);
+        // loop through all dice faces
+        for (const die of json.data.dice) {
+            // create an image element
+            let image = document.createElement('img');
+            // assign the image file to each item
+            image.src = die.image;
+            // add each new image to the div
+            diceDiv.appendChild(image);
+        }
+    })
+    .catch(function(error) {
+        console.log(error);
+    });</code></pre>
+
+        <h3>Output</h3>
+    
+        <div id="all-dice"></div>
+      
+        <hr>
+
+        <!-- **********************-->
+        <!-- Example 2             -->
+        <!-- **********************-->
+
+        <h2 id="example-2">Example 2: Get Two Random Cards</h2>
+        <p>In this example, we connect to the Get All Playing Cards endpoint then draw two random playing cards. The two card images are displayed on the page. A button lets the user draw two new cards.</p>
+
+        <h3>JavaScript</h3>
+        
+        <pre><code class="language-javascript">// variables for HTML elements
+const twoCardsDiv = document.getElementById('two-cards');
+const drawTwoCardsButton = document.getElementById('draw-two-cards');
+
+function drawTwoCards() {
+    // connect to cards endpoint
+    fetch('https://api.projectgamesapi.xyz/v1/cards')
+        .then(response => response.json())
+        .then(json => {
+            // this console.log is useful to see the json response
+            console.log(json);
+
+            // generate two random numbers between 1 and 52
+            let randomCardID1 = Math.floor(Math.random()*(52)+1);
+            let randomCardID2 = Math.floor(Math.random()*(52)+1);
+
+            // loop through all cards
+            for (const card of json.data.cards) {            
+                // if the card ID matches the random number, that's the card to draw
+                if (card.id == randomCardID1 || card.id == randomCardID2) {
+                    // create an image element
+                    let image = document.createElement('img');
+                    // assign the image file to each item
+                    image.src = card.image;
+                    // add each new image to the div
+                    twoCardsDiv.appendChild(image);
+                }
+            }
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+}
+
+// call the function to draw two cards
+drawTwoCards();
+
+// button to draw two new cards
+drawTwoCardsButton.addEventListener('click', function() { 
+    // reset the cards by removing the current children
+    while (twoCardsDiv.firstChild) {
+        twoCardsDiv.removeChild(twoCardsDiv.firstChild);
+    }
+    // draw two new cards by calling the function again
+    drawTwoCards();
+});</code></pre>
+
+        <h3>Output</h3>
+    
+        <div id="two-cards"></div>
+        <button class="button" id="draw-two-cards">Draw 2 Cards</button>
+      
+        <hr>
+
+        <!-- **********************-->
+        <!-- Example 3             -->
+        <!-- **********************-->
+
+        <h2 id="example-3">Example 3: Shuffle a Random Word</h2>
+        <p>This code selects a random word from the Get All Words endpoint and then shuffles the word. It does this by adding the characters from the word to an array, randomizing them with The Fisher Yates Method, and then displaying the new array of characters on the page.</p>
+
+        <h3>JavaScript</h3>
+        
+        <pre><code class="language-javascript">// variables for HTML elements
+const originalWord = document.getElementById('original-word');
+const shuffledWord = document.getElementById('shuffled-word');
+const newWordButton = document.getElementById('new-word-button');
+
+function getWord() {
+    // connect to words endpoint
+    fetch('https://api.projectgamesapi.xyz/v1/words')
+        .then(response => response.json())
+        .then(json => {
+            // this console.log is useful to see the json response
+            console.log(json);
+            // create an array for the word
+            let wordArray = new Array();
+            // generate a random number between 1 and the number of possible words
+            let max = json.data.rows_returned;
+            let randomNum = Math.floor(Math.random()*(max)+1);
+
+            // loop through all words
+            for (const word of json.data.words) {            
+                // if the word ID matches the random number, that's our word
+                if (word.id == randomNum) {
+                    // get the actual word out of the "word" object
+                    let chosenWord = word.word;
+                    // add the word to the paragraph in the HTML
+                    originalWord.innerHTML = chosenWord;
+                    // create an array of letters from the word
+                    wordArray = Array.from(chosenWord);
+                    // randomize the array
+                    // The Fisher Yates Method
+                    // https://www.w3schools.com/js/js_array_sort.asp
+                    for (let i = wordArray.length -1; i > 0; i--) {
+                        let j = Math.floor(Math.random() * i);
+                        let k = wordArray[i];
+                        wordArray[i] = wordArray[j];
+                        wordArray[j] = k;
+                    }
+                    // add the shuffled word to the paragraph in the HTML
+                    shuffledWord.innerHTML = wordArray.join('');
+                }
+            }
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+}
+
+// call the main function
+getWord();
+
+// event listener on the button that gets a new word
+newWordButton.addEventListener('click', function() { 
+    // get a new word by calling the function again
+    getWord();    
+});</code></pre>
+
+        <h3>Output</h3>
+    
+        <p class="scrambled-words">Orignal Word: <span id="original-word"></span></p>
+        <p class="scrambled-words">Scrambled Word: <span id="shuffled-word"></span></p>
+        <button class="button" id="new-word-button">Get New Word</button>
+      
+        <hr>
+
+        <!-- **********************-->
+        <!-- Example 4             -->
+        <!-- **********************-->
+
+        <h2 id="example-4">Example 4: Draw One Tarot Card</h2>
+        <p>In this example, we draw one random card from the deck of tarot cards and display it on the page along with its name and description. A button allows the user to get a new random card.</p>
+
+        <h3>JavaScript</h3>
+        
+        <pre><code class="language-javascript">// variables for HTML elements
+const tarotImage = document.getElementById('tarot-card');
+const tarotName = document.getElementById('tarot-card-name');
+const tarotDescription = document.getElementById('tarot-card-description');
+const tarotButton = document.getElementById('new-tarot-card');
+
+function getOneTarotCard() {
+    //connect to tarot endpoint
+    fetch('https://api.projectgamesapi.xyz/v1/tarot')
+        .then(response => response.json())
+        .then(json => {
+            // this console.log is useful to see the json response
+            console.log(json);
+            // generate a random number between 1 and 78
+            let randomNum = Math.floor(Math.random()*(78)+1);
+
+            // loop through all tarot cards
+            for (const card of json.data.tarot) {            
+                // if the card ID matches the random number, that's the card to draw
+                if (card.id == randomNum) {
+                    // assign the image src to the image tag in the HTML
+                    tarotImage.src = card.image;
+                    // populate the card name
+                    // adding suit name only if it's not the Major suit
+                    if (card.id < 23) {
+                        tarotName.innerHTML = card.name;
+                    }
+                    else {
+                        tarotName.innerHTML = card.name + " of " + card.suit; 
+                    }
+                    // populate the card description
+                    tarotDescription.innerHTML = card.description;
+                }
+            }
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+}
+
+// call the main function
+getOneTarotCard();
+
+// event listener on the button that gets a new card
+tarotButton.addEventListener('click', function() { 
+    // get a new card by calling the function again
+    getOneTarotCard();    
+});</code></pre>
+
+        <h3>Output</h3>
+    
+        <img id="tarot-card">
+        <h4 id="tarot-card-name"></h4>
+        <p id="tarot-card-description"></p>
+        <button class="button" id="new-tarot-card">Get New Card</button>
+      
+        <hr>
+
+        <!-- **********************-->
+        <!-- Example 5             -->
+        <!-- **********************-->
+
+        <h2 id="example-5">Example 5: Get Coins and Total</h2>
+        <p>This code connects to the Get All Coins endpoint to select four random coins. A running total adds up the value of each coin. Each coin's image is displayed on the page along with a total value of all four coins.</p>
+
+        <h3>JavaScript</h3>
+        
+        <pre><code class="language-javascript">// variables for HTML elements
+const coinsDiv = document.getElementById('four-coins');
+const coinsTotal = document.getElementById('coins-total');
+const coinsButton = document.getElementById('coins-button');
+
+function getCoins() {
+    //connect to coins endpoint
+    fetch('https://api.projectgamesapi.xyz/v1/coins')
+        .then(response => response.json())
+        .then(json => {
+            // this console.log is useful to see the json response
+            console.log(json);
+            // variable for the total value of all four coins
+            let total = 0;
+
+            // loop through 4 times to get 4 coins 
+            for (let i = 0; i < 4; i++) {              
+                // generate a random number between 1 and the number of possible coins
+                let max = json.data.rows_returned;
+                let randomNum = Math.floor(Math.random()*(max)+1);
+                // loop through all coins
+                for (const coin of json.data.coins) {            
+                    // if the coin ID matches the random number, that's our coin
+                    if (coin.id == randomNum) {
+                        // add coin value to the total
+                        total = total + coin.value;
+                        // create an image element
+                        let image = document.createElement('img');
+                        // assign the image file to each item
+                        image.src = coin.image;
+                        // add each new image to the div
+                        coinsDiv.appendChild(image);
+                    }
+                }
+            }
+            // divide total by 100 to get an amount in cents
+            total = total/100;
+            // makes the number display to 2 decimal places (such as 0.30 instead of 0.3)
+            total = (Math.round(total * 100) / 100).toFixed(2);
+            // populate the coin total text
+            coinsTotal.innerHTML = total;
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+}
+
+// call the main function
+getCoins();
+
+// event listener on the button that gets new coins
+coinsButton.addEventListener('click', function() { 
+    // reset the coins by removing the current children
+    while (coinsDiv.firstChild) {
+        coinsDiv.removeChild(coinsDiv.firstChild);
+    }
+    // get new coins by calling the function again
+    getCoins();    
+});</code></pre>
+
+        <h3>Output</h3>
+    
+        <div id="four-coins"></div>
+        <p>Total: $<span id="coins-total"></span></p>
+        <button class="button" id="coins-button">Get Four Coins</button>
+      
+        <hr>
+
+        <!-- **********************-->
+        <!-- Example 6             -->
+        <!-- **********************-->
+
+        <h2 id="example-6">Example 6: Get Dice and Total</h2>
+        <p>Similar to the previous example, this code connects to the Get All Dice endpoint and specifies only white dice. It selects five random die faces, displays them on the page, keeps a running count of the total value of each die, and displays the final total.</p>
+
+        <h3>JavaScript</h3>
+        
+        <pre><code class="language-javascript">// variables for HTML elements
+const fiveDiceDiv = document.getElementById('five-dice');
+const diceTotal = document.getElementById('dice-total');
+const diceButton = document.getElementById('dice-button');
+
+function getFiveDice() {
+    //connect to dice endpoint for only white dice
+    fetch('https://api.projectgamesapi.xyz/v1/dice/white')
+        .then(response => response.json())
+        .then(json => {
+            // this console.log is useful to see the json response
+            console.log(json);
+            // variable for the total value of all five dice
+            let total = 0;
+
+            // loop through 5 times to get 5 dice
+            for (let i = 0; i < 5; i++) {              
+                // generate a random number between 1 and 6
+                let randomNum = Math.floor(Math.random()*(6)+1);
+                // loop through all dice
+                for (const dice of json.data.dice) {
+                    // if the die ID matches the random number, that's our die
+                    if (dice.id == randomNum) {
+                        // add dice value to the total
+                        total = total + dice.value;
+                        // create an image element
+                        let image = document.createElement('img');
+                        // assign the image file to each item
+                        image.src = dice.image;
+                        // add each new image to the div
+                        fiveDiceDiv.appendChild(image);
+                    }
+                }
+            }
+            // populate the dice total text
+            diceTotal.innerHTML = total;
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+}
+
+// call the main function
+getFiveDice();
+
+// event listener on the button that gets new dice
+diceButton.addEventListener('click', function() { 
+    // reset the dice by removing the current children
+    while (fiveDiceDiv.firstChild) {
+        fiveDiceDiv.removeChild(fiveDiceDiv.firstChild);
+    }
+    // get new dice by calling the function again
+    getFiveDice();    
+});</code></pre>
+
+        <h3>Output</h3>
+    
+        <div id="five-dice"></div>
+        <p>Total: <span id="dice-total"></span></p>
+        <button class="button" id="dice-button">Get Five Dice</button>
+    
+      </div><!-- end main -->
+    </div><!-- end grid container -->
+  </div><!-- end container -->
+
+  <footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="https://www.projectgamesapi.xyz/documentation.html">Documentation</a>&nbsp; | &nbsp;
+            <a href="https://www.projectgamesapi.xyz/examples.html">Examples</a>&nbsp; | &nbsp;
+            <a href="https://www.projectgamesapi.xyz/about.html">About</a>
+        </div>
+        <p class="copyright">Copyright © 2022 Project Games API</p>
+    </div>
+</footer>
+
+  <script src="https://www.projectgamesapi.xyz/scripts/examples-script.js"></script>
+  
+</body>
+</html>

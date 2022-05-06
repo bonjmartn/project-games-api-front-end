@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- main css -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Ubuntu+Mono&display=swap" rel="stylesheet"> 
+   
+  <title>Project Games API | Documentation</title>
+</head>
+<body>
+  <header>
+  <nav>
+    <a href="https://www.projectgamesapi.xyz/index.html"><img src="https://www.projectgamesapi.xyz/img/logo-project-games-api.svg"></a>
+    <div class="nav-links">
+    <a href="https://www.projectgamesapi.xyz/documentation.html">Docs</a>
+    <a href="https://www.projectgamesapi.xyz/examples.html">Examples</a>
+    <a href="https://www.projectgamesapi.xyz/about.html">About</a>
+    </div>
+  </nav>
+  </header>
+
+  <div class="container">
+
+  <div class="grid-container">
+    <div class="grid-sidebar">
+        <div class="sticky">
+        <h3>Contents</h3>
+            <!-- **********************-->
+            <!-- Contents Links        -->
+            <!-- **********************-->
+            <div class="contents">
+              <p><a href="#get-all-playing-cards-title">Get All Playing Cards</a></p>
+              <p><a href="#get-playing-card-by-id-title">Get Playing Card By ID</a></p>
+              <p><a href="#get-all-tarot-cards-title">Get All Tarot Cards</a></p>
+              <p><a href="#get-tarot-card-by-id-title">Get Tarot Card By ID</a></p>
+              <p><a href="#get-all-coins-title">Get All Coins</a></p>
+              <p><a href="#get-coin-by-id-title">Get Coin By ID</a></p>
+              <p><a href="#get-all-dice-title">Get All Dice</a></p>
+              <p><a href="#get-die-by-id-title">Get Die By ID</a></p>
+              <p><a href="#get-dice-by-color-title">Get Dice By Color</a></p>
+              <p><a href="#get-all-words-title">Get All Words</a></p>
+              <p><a href="#get-word-by-id-title">Get Word By ID</a></p>
+              <p><a href="#get-words-by-topic-title">Get Words By Topic</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="grid-main">
+    <h1>Documentation</h1>
+    <h3>GET Only</h3>
+    <p>This is a consumption-only REST API. It only offers the GET method for resources.</p>
+    <h3>Authentication Not Required</h3>
+    <p>This API does not require authentication to connect to it. This was done so that you can easily use it for your projects. However, this could change in the future if there are too many requests to the API.</p>
+
+    <hr>
+
+    <h2>Deck of Playing Cards</h2>
+
+    <!-- **********************-->
+    <!-- Get All Playing Cards -->
+    <!-- **********************-->
+
+    <h3 id="get-all-playing-cards-title">Get All Playing Cards</h3>
+    <p>Get all cards in the deck of playing cards.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-all-playing-cards-URL">https://api.projectgamesapi.xyz/v1/cards</p>
+      <span class="clipboard" id="get-all-playing-cards-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-all-playing-cards-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+  "statusCode": 200,
+  "success": true,
+  "messages": [],
+  "data": {
+    "rows_returned": 52,
+      "cards": [
+      {
+      "id": 1,
+      "name": "Ace",
+      "suit": "Spades",
+      "value": 1,
+      "image": "https://api.projectgamesapi.xyz/v1/images/AS.png"
+      },
+      {
+      "id": 2,
+      "name": "Two",
+      "suit": "Spades",
+      "value": 2,
+      "image": "https://api.projectgamesapi.xyz/v1/images/2S.png"
+      },
+      {
+      "id": 3,
+      "name": "Three",
+      "suit": "Spades",
+      "value": 3,
+      "image": "https://api.projectgamesapi.xyz/v1/images/3S.png"
+      },
+      ...
+    ]
+  }
+}</pre></code>
+
+    <p>Note: The JSON output shown above is truncated. The full result includes all 52 cards.</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>statusCode</td>
+        <td>The HTTP status code of the GET request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>success</td>
+        <td>Whether or not the request was successful.</td>
+        <td>boolean</td>
+      </tr>
+      <tr>
+        <td>messages</td>
+        <td>Error messages related to the request.</td>
+        <td>array</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>This is the main set of data that the GET request returns.</td>
+        <td>object</td>
+      </tr>
+      <tr>
+        <td>rows_returned</td>
+        <td>This number of rows returned with the request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>cards</td>
+        <td>This is the resource that is being returned from the database.</td>
+        <td>array of objects</td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>The ID of the card.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>The name of the card.</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>suit</td>
+        <td>The suit of the card. Will only contain "Spades", "Hearts", "Clubs", or "Diamonds".</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The value of the card.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>The file path to the image for the card.</td>
+        <td>string</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- **********************-->
+    <!-- Get Playing Card By ID -->
+    <!-- **********************-->
+
+    <h3 id="get-playing-card-by-id-title">Get Playing Card By ID</h3>
+    <p>Get one card in the deck of playing cards by ID number.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-playing-card-by-id-URL">https://api.projectgamesapi.xyz/v1/cards/{id}</p>
+      <span class="clipboard" id="get-playing-card-by-id-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-playing-card-by-id-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+  "statusCode": 200,
+  "success": true,
+  "messages": [],
+  "data": {
+    "rows_returned": 1,
+    "cards": [
+      {
+      "id": 1,
+      "name": "Ace",
+      "suit": "Spades",
+      "value": 1,
+      "image": "https://api.projectgamesapi.xyz/v1/images/AS.png"
+      }
+    ]
+  }
+}</pre></code>
+
+    <p>Note: Replace {id} with the ID of the card you want to retrieve.</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>statusCode</td>
+        <td>The HTTP status code of the GET request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>success</td>
+        <td>Whether or not the request was successful.</td>
+        <td>boolean</td>
+      </tr>
+      <tr>
+        <td>messages</td>
+        <td>Error messages related to the request.</td>
+        <td>array</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>This is the main set of data that the GET request returns.</td>
+        <td>object</td>
+      </tr>
+      <tr>
+        <td>rows_returned</td>
+        <td>This number of rows returned with the request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>cards</td>
+        <td>This is the resource that is being returned from the database.</td>
+        <td>array of objects</td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>The ID of the card.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>The name of the card.</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>suit</td>
+        <td>The suit of the card. Will only contain "Spades", "Hearts", "Clubs", or "Diamonds".</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The value of the card.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>The file path to the image for the card.</td>
+        <td>string</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Deck of Tarot Cards</h2>
+
+    <!-- **********************-->
+    <!-- Get All Tarot Cards -->
+    <!-- **********************-->
+
+    <h3 id="get-all-tarot-cards-title">Get All Tarot Cards</h3>
+    <p>Get all cards in the deck of tarot cards.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-all-tarot-cards-URL">https://api.projectgamesapi.xyz/v1/tarot</p>
+      <span class="clipboard" id="get-all-tarot-cards-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-all-tarot-cards-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+"statusCode": 200,
+"success": true,
+"messages": [],
+"data": {
+  "rows_returned": 78,
+  "tarot": [
+      {
+        "id": 1,
+        "name": "The Fool",
+        "suit": "Major",
+        "description": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
+        "image": "https://api.projectgamesapi.xyz/v1/images/Tarot_00_Fool.jpg"
+      },
+      {
+        "id": 2,
+        "name": "The Magician",
+        "suit": "Major",
+        "description": "Skill, diplomacy, address, subtlety; sickness, pain, loss, disaster, snares of enemies; self-confidence, will; the Querent himself, if male.",
+        "image": "https://api.projectgamesapi.xyz/v1/images/Tarot_01_Magician.jpg"
+      },
+      {
+        "id": 3,
+        "name": "High Priestess",
+        "suit": "Major",
+        "description": "Secrets, mystery, the future as yet unrevealed; the woman who interests the Querent, if male; the Querent herself, if female; silence, tenacity; mystery, wisdom, science.",
+        "image": "https://api.projectgamesapi.xyz/v1/images/Tarot_02_High_Priestess.jpg"
+      },
+    ...
+    ]
+  }
+}</pre></code>
+
+    <p>Note: The JSON output shown above is truncated. The full result includes all 78 cards.</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>statusCode</td>
+        <td>The HTTP status code of the GET request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>success</td>
+        <td>Whether or not the request was successful.</td>
+        <td>boolean</td>
+      </tr>
+      <tr>
+        <td>messages</td>
+        <td>Error messages related to the request.</td>
+        <td>array</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>This is the main set of data that the GET request returns.</td>
+        <td>object</td>
+      </tr>
+      <tr>
+        <td>rows_returned</td>
+        <td>This number of rows returned with the request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>tarot</td>
+        <td>This is the resource that is being returned from the database.</td>
+        <td>array of objects</td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>The ID of the card.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>The name of the card.</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>suit</td>
+        <td>The suit of the card. Will only contain "Major", "Cups", "Wands", "Swords", or "Pentacles".</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>description</td>
+        <td>The description for the card.</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>The file path to the image for the card.</td>
+        <td>string</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- **********************-->
+    <!-- Get Tarot Card By ID -->
+    <!-- **********************-->
+
+    <h3 id="get-tarot-card-by-id-title">Get Tarot Card By ID</h3>
+    <p>Get one card in the deck of tarot cards by ID number.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-tarot-card-by-id-URL">https://api.projectgamesapi.xyz/v1/tarot/{id}</p>
+      <span class="clipboard" id="get-tarot-card-by-id-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-tarot-card-by-id-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+  "statusCode": 200,
+  "success": true,
+  "messages": [],
+  "data": {
+    "rows_returned": 1,
+    "cards": [
+      {
+      "id": 1,
+      "name": "The Fool",
+      "suit": "Major",
+      "description": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
+      "image": "https://api.projectgamesapi.xyz/v1/images/Tarot_00_Fool.jpg"
+      }
+    ]
+  }
+}</pre></code>
+
+    <p>Note: Replace {id} with the ID of the card you want to retrieve.</p>
+
+    <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>statusCode</td>
+          <td>The HTTP status code of the GET request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>success</td>
+          <td>Whether or not the request was successful.</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>messages</td>
+          <td>Error messages related to the request.</td>
+          <td>array</td>
+        </tr>
+        <tr>
+          <td>data</td>
+          <td>This is the main set of data that the GET request returns.</td>
+          <td>object</td>
+        </tr>
+        <tr>
+          <td>rows_returned</td>
+          <td>This number of rows returned with the request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>tarot</td>
+          <td>This is the resource that is being returned from the database.</td>
+          <td>array of objects</td>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>The ID of the card.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>The name of the card.</td>
+          <td>string</td>
+        </tr>
+        <tr>
+          <td>suit</td>
+          <td>The suit of the card. Will only contain "Major, "Cups", "Wands", "Swords", or "Pentacles".</td>
+          <td>string</td>
+        </tr>
+        <tr>
+          <td>description</td>
+          <td>The description for the card.</td>
+          <td>string</td>
+        </tr>
+        <tr>
+          <td>image</td>
+          <td>The file path to the image for the card.</td>
+          <td>string</td>
+        </tr>
+        </tbody>
+      </table>
+  
+      <hr>
+
+    <h2>Coins</h2>
+
+    <!-- **********************-->
+    <!-- Get All Coins         -->
+    <!-- **********************-->
+
+    <h3 id="get-all-coins-title">Get All Coins</h3>
+    <p>Get all available coin faces.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-all-coins-URL">https://api.projectgamesapi.xyz/v1/coins</p>
+      <span class="clipboard" id="get-all-coins-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-all-coins-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+  "statusCode": 200,
+  "success": true,
+  "messages": [],
+  "data": {
+    "rows_returned": 10,
+    "coins": [
+      {
+        "id": 1,
+        "name": "Penny",
+        "side": "Heads",
+        "value": 1,
+        "image": "https://api.projectgamesapi.xyz/v1/images/penny-heads.png"
+      },
+      {
+        "id": 2,
+        "name": "Penny",
+        "side": "Tails",
+        "value": 1,
+        "image": "https://api.projectgamesapi.xyz/v1/images/penny-tails.png"
+      },
+      {
+        "id": 3,
+        "name": "Nickel",
+        "side": "Heads",
+        "value": 5,
+        "image": "https://api.projectgamesapi.xyz/v1/images/nickel-heads.png"
+      },
+      ...
+    ]
+  }
+}</pre></code>
+
+    <p>Note: The JSON output shown above is truncated. The full result includes all 10 coins.</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>statusCode</td>
+        <td>The HTTP status code of the GET request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>success</td>
+        <td>Whether or not the request was successful.</td>
+        <td>boolean</td>
+      </tr>
+      <tr>
+        <td>messages</td>
+        <td>Error messages related to the request.</td>
+        <td>array</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>This is the main set of data that the GET request returns.</td>
+        <td>object</td>
+      </tr>
+      <tr>
+        <td>rows_returned</td>
+        <td>This number of rows returned with the request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>coins</td>
+        <td>This is the resource that is being returned from the database.</td>
+        <td>array of objects</td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>The ID of the coin.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>The name of the coin.</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>side</td>
+        <td>The side of the coin. Will only contain "Heads" or "Tails".</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The value of the coin.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>The file path to the image for the coin.</td>
+        <td>string</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- **********************-->
+    <!-- Get Coin By ID        -->
+    <!-- **********************-->
+
+    <h3 id="get-coin-by-id-title">Get Coin By ID</h3>
+    <p>Get one coin face by ID number.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-coin-by-id-URL">https://api.projectgamesapi.xyz/v1/coins/{id}</p>
+      <span class="clipboard" id="get-coin-by-id-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-coin-by-id-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+  "statusCode": 200,
+  "success": true,
+  "messages": [],
+  "data": {
+    "rows_returned": 1,
+    "coins": [
+      {
+        "id": 1,
+        "name": "Penny",
+        "side": "Heads",
+        "value": 1,
+        "image": "https://api.projectgamesapi.xyz/v1/images/penny-heads.png"
+      }
+    ]
+  }
+}</pre></code>
+
+    <p>Note: Replace {id} with the ID of the coin you want to retrieve.</p>
+
+    <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>statusCode</td>
+          <td>The HTTP status code of the GET request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>success</td>
+          <td>Whether or not the request was successful.</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>messages</td>
+          <td>Error messages related to the request.</td>
+          <td>array</td>
+        </tr>
+        <tr>
+          <td>data</td>
+          <td>This is the main set of data that the GET request returns.</td>
+          <td>object</td>
+        </tr>
+        <tr>
+          <td>rows_returned</td>
+          <td>This number of rows returned with the request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>coins</td>
+          <td>This is the resource that is being returned from the database.</td>
+          <td>array of objects</td>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>The ID of the coin.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>The name of the coin.</td>
+          <td>string</td>
+        </tr>
+        <tr>
+          <td>side</td>
+          <td>The side of the coin. Will only contain "Heads" or "Tails".</td>
+          <td>string</td>
+        </tr>
+        <tr>
+          <td>value</td>
+          <td>The value of the coin.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>image</td>
+          <td>The file path to the image for the coin.</td>
+          <td>string</td>
+        </tr>
+        </tbody>
+      </table>
+  
+      <hr>
+
+    <h2>Dice</h2>
+
+    <!-- **********************-->
+    <!-- Get All Dice         -->
+    <!-- **********************-->
+
+    <h3 id="get-all-dice-title">Get All Dice</h3>
+    <p>Get all available die faces.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-all-dice-URL">https://api.projectgamesapi.xyz/v1/dice</p>
+      <span class="clipboard" id="get-all-dice-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-all-dice-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+"statusCode": 200,
+"success": true,
+"messages": [],
+"data": {
+  "rows_returned": 18,
+  "dice": [
+      {
+        "id": 1,
+        "name": "One",
+        "color": "White",
+        "value": 1,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-white-1.png"
+      },
+      {
+        "id": 2,
+        "name": "Two",
+        "color": "White",
+        "value": 2,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-white-2.png"
+      },
+      {
+        "id": 3,
+        "name": "Three",
+        "color": "White",
+        "value": 3,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-white-3.png"
+      },
+      ...
+    ]
+  }
+}</pre></code>
+
+    <p>Note: The JSON output shown above is truncated. The full result includes all 18 die faces.</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>statusCode</td>
+        <td>The HTTP status code of the GET request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>success</td>
+        <td>Whether or not the request was successful.</td>
+        <td>boolean</td>
+      </tr>
+      <tr>
+        <td>messages</td>
+        <td>Error messages related to the request.</td>
+        <td>array</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>This is the main set of data that the GET request returns.</td>
+        <td>object</td>
+      </tr>
+      <tr>
+        <td>rows_returned</td>
+        <td>This number of rows returned with the request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>dice</td>
+        <td>This is the resource that is being returned from the database.</td>
+        <td>array of objects</td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>The ID of the die.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>The name of the die.</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>The face of the die. Will only contain "Red", "Black", or "White".</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The number of pips on the die face.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>The file path to the image for the die face.</td>
+        <td>string</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- **********************-->
+    <!-- Get Die By ID        -->
+    <!-- **********************-->
+
+    <h3 id="get-die-by-id-title">Get Die By ID</h3>
+    <p>Get one die face by ID number.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-die-by-id-URL">https://api.projectgamesapi.xyz/v1/dice/{id}</p>
+      <span class="clipboard" id="get-die-by-id-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-die-by-id-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+"statusCode": 200,
+"success": true,
+"messages": [],
+"data": {
+  "rows_returned": 1,
+  "dice": [
+      {
+        "id": 1,
+        "name": "One",
+        "color": "White",
+        "value": 1,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-white-1.png"
+      }
+    ]
+  }
+}</pre></code>
+
+    <p>Note: Replace {id} with the ID of the die face you want to retrieve.</p>
+
+    <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>statusCode</td>
+          <td>The HTTP status code of the GET request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>success</td>
+          <td>Whether or not the request was successful.</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>messages</td>
+          <td>Error messages related to the request.</td>
+          <td>array</td>
+        </tr>
+        <tr>
+          <td>data</td>
+          <td>This is the main set of data that the GET request returns.</td>
+          <td>object</td>
+        </tr>
+        <tr>
+          <td>rows_returned</td>
+          <td>This number of rows returned with the request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>dice</td>
+          <td>This is the resource that is being returned from the database.</td>
+          <td>array of objects</td>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>The ID of the die.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>The name of the die.</td>
+          <td>string</td>
+        </tr>
+        <tr>
+          <td>color</td>
+          <td>The face of the die. Will only contain "Red", "Black", or "White".</td>
+          <td>string</td>
+        </tr>
+        <tr>
+          <td>value</td>
+          <td>The number of pips on the die face.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>image</td>
+          <td>The file path to the image for the die face.</td>
+          <td>string</td>
+        </tr>
+        </tbody>
+      </table>
+  
+      <hr>
+
+    <!-- **********************-->
+    <!-- Get Dice by Color     -->
+    <!-- **********************-->
+
+    <h3 id="get-dice-by-color-title">Get Dice by Color</h3>
+    <p>Get a set of dice by color.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-dice-by-color-URL">https://api.projectgamesapi.xyz/v1/dice/{color}</p>
+      <span class="clipboard" id="get-dice-by-color-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-dice-by-color-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+"statusCode": 200,
+"success": true,
+"messages": [],
+"data": {
+  "rows_returned": 6,
+  "dice": [
+      {
+        "id": 13,
+        "name": "One",
+        "color": "Red",
+        "value": 1,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-red-1.png"
+      },
+      {
+        "id": 14,
+        "name": "Two",
+        "color": "Red",
+        "value": 2,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-red-2.png"
+      },
+      {
+        "id": 15,
+        "name": "Three",
+        "color": "Red",
+        "value": 3,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-red-3.png"
+      },
+      {
+        "id": 16,
+        "name": "Four",
+        "color": "Red",
+        "value": 4,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-red-4.png"
+      },
+      {
+        "id": 17,
+        "name": "Five",
+        "color": "Red",
+        "value": 5,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-red-5.png"
+      },
+      {
+        "id": 18,
+        "name": "Six",
+        "color": "Red",
+        "value": 6,
+        "image": "https://api.projectgamesapi.xyz/v1/images/dice-red-6.png"
+      }
+    ]
+  }
+}</pre></code>
+
+    <p>Note: Replace {color} with the color of dice you want to retrieve (red, black, or white.)</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>statusCode</td>
+        <td>The HTTP status code of the GET request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>success</td>
+        <td>Whether or not the request was successful.</td>
+        <td>boolean</td>
+      </tr>
+      <tr>
+        <td>messages</td>
+        <td>Error messages related to the request.</td>
+        <td>array</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>This is the main set of data that the GET request returns.</td>
+        <td>object</td>
+      </tr>
+      <tr>
+        <td>rows_returned</td>
+        <td>This number of rows returned with the request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>dice</td>
+        <td>This is the resource that is being returned from the database.</td>
+        <td>array of objects</td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>The ID of the die.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>The name of the die.</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>color</td>
+        <td>The face of the die. Will only contain "Red", "Black", or "White".</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>The number of pips on the die face.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>image</td>
+        <td>The file path to the image for the die face.</td>
+        <td>string</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Words</h2>
+
+    <!-- **********************-->
+    <!-- Get All Words         -->
+    <!-- **********************-->
+
+    <h3 id="get-all-words-title">Get All Words</h3>
+    <p>Get all words across all available topics.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-all-words-URL">https://api.projectgamesapi.xyz/v1/words</p>
+      <span class="clipboard" id="get-all-words-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-all-words-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+"statusCode": 200,
+"success": true,
+"messages": [],
+"data": {
+  "rows_returned": 74,
+  "words": [
+      {
+        "id": 1,
+        "word": "January",
+        "num_chars": 7,
+        "topic": "Months"
+      },
+      {
+        "id": 2,
+        "word": "February",
+        "num_chars": 8,
+        "topic": "Months"
+      },
+      {
+        "id": 3,
+        "word": "March",
+        "num_chars": 5,
+        "topic": "Months"
+      },
+      ...
+    ]
+  }
+}</pre></code>
+
+    <p>Note: The JSON output shown above is truncated. The full result includes all 74 words.</p>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>statusCode</td>
+        <td>The HTTP status code of the GET request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>success</td>
+        <td>Whether or not the request was successful.</td>
+        <td>boolean</td>
+      </tr>
+      <tr>
+        <td>messages</td>
+        <td>Error messages related to the request.</td>
+        <td>array</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>This is the main set of data that the GET request returns.</td>
+        <td>object</td>
+      </tr>
+      <tr>
+        <td>rows_returned</td>
+        <td>This number of rows returned with the request.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>words</td>
+        <td>This is the resource that is being returned from the database.</td>
+        <td>array of objects</td>
+      </tr>
+      <tr>
+        <td>id</td>
+        <td>The ID of the word.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>word</td>
+        <td>The word.</td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td>num_chars</td>
+        <td>The number characters in the word.</td>
+        <td>integer</td>
+      </tr>
+      <tr>
+        <td>topic</td>
+        <td>The topic or group that the word belongs to. Will only contain "Months", "States", or "Games".</td>
+        <td>string</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- **********************-->
+    <!-- Get Word By ID        -->
+    <!-- **********************-->
+
+    <h3 id="get-word-by-id-title">Get Word By ID</h3>
+    <p>Get one word by ID number.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-word-by-id-URL">https://api.projectgamesapi.xyz/v1/words/{id}</p>
+      <span class="clipboard" id="get-word-by-id-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-word-by-id-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+"statusCode": 200,
+"success": true,
+"messages": [],
+"data": {
+  "rows_returned": 1,
+  "words": [
+      {
+        "id": 1,
+        "word": "January",
+        "num_chars": 7,
+        "topic": "Months"
+      }
+    ]
+  }
+}</pre></code>
+
+    <p>Note: Replace {id} with the ID of the word you want to retrieve.</p>
+
+    <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>statusCode</td>
+          <td>The HTTP status code of the GET request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>success</td>
+          <td>Whether or not the request was successful.</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>messages</td>
+          <td>Error messages related to the request.</td>
+          <td>array</td>
+        </tr>
+        <tr>
+          <td>data</td>
+          <td>This is the main set of data that the GET request returns.</td>
+          <td>object</td>
+        </tr>
+        <tr>
+          <td>rows_returned</td>
+          <td>This number of rows returned with the request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>words</td>
+          <td>This is the resource that is being returned from the database.</td>
+          <td>array of objects</td>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>The ID of the word.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>word</td>
+          <td>The word.</td>
+          <td>string</td>
+        </tr>
+        <tr>
+          <td>num_chars</td>
+          <td>The number characters in the word.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>topic</td>
+          <td>The topic or group that the word belongs to. Will only contain "Months", "States", or "Games".</td>
+          <td>string</td>
+        </tr>
+        </tbody>
+      </table>
+  
+      <hr>
+
+    <!-- **********************-->
+    <!-- Get Words by Topic     -->
+    <!-- **********************-->
+
+    <h3 id="get-words-by-topic-title">Get Word by Topic</h3>
+    <p>Get a group of words by topic.</p>
+    <div class="endpoint-wrapper">
+      <span class="get">GET</span>
+      <p class="endpoint" id="get-words-by-topic-URL">https://api.projectgamesapi.xyz/v1/words/{topic}</p>
+      <span class="clipboard" id="get-words-by-topic-clipboard"><img src="https://www.projectgamesapi.xyz/img/clipboard.svg"></span>
+      <span class="tooltip hide" id="get-words-by-topic-tooltip">Copied!</span>
+    </div>
+    <code><pre class="json">{
+"statusCode": 200,
+"success": true,
+"messages": [],
+"data": {
+  "rows_returned": 12,
+  "words": [
+      {
+        "id": 1,
+        "word": "January",
+        "num_chars": 7,
+        "topic": "Months"
+      },
+      {
+        "id": 2,
+        "word": "February",
+        "num_chars": 8,
+        "topic": "Months"
+      },
+      {
+        "id": 3,
+        "word": "March",
+        "num_chars": 5,
+        "topic": "Months"
+      },
+      {
+        "id": 4,
+        "word": "April",
+        "num_chars": 5,
+        "topic": "Months"
+      },
+      {
+        "id": 5,
+        "word": "May",
+        "num_chars": 3,
+        "topic": "Months"
+      },
+      {
+        "id": 6,
+        "word": "June",
+        "num_chars": 4,
+        "topic": "Months"
+      },
+      {
+        "id": 7,
+        "word": "July",
+        "num_chars": 4,
+        "topic": "Months"
+      },
+      {
+        "id": 8,
+        "word": "August",
+        "num_chars": 6,
+        "topic": "Months"
+      },
+      {
+        "id": 9,
+        "word": "September",
+        "num_chars": 9,
+        "topic": "Months"
+      },
+      {
+        "id": 10,
+        "word": "October",
+        "num_chars": 7,
+        "topic": "Months"
+      },
+      {
+        "id": 11,
+        "word": "November",
+        "num_chars": 8,
+        "topic": "Months"
+      },
+      {
+        "id": 12,
+        "word": "December",
+        "num_chars": 8,
+        "topic": "Months"
+      }
+    ]
+  }
+}</pre></code>
+
+    <p>Note: Replace {topic} with the types of words you want to retrieve (months, states, or games.)</p>
+    <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>statusCode</td>
+          <td>The HTTP status code of the GET request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>success</td>
+          <td>Whether or not the request was successful.</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>messages</td>
+          <td>Error messages related to the request.</td>
+          <td>array</td>
+        </tr>
+        <tr>
+          <td>data</td>
+          <td>This is the main set of data that the GET request returns.</td>
+          <td>object</td>
+        </tr>
+        <tr>
+          <td>rows_returned</td>
+          <td>This number of rows returned with the request.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>words</td>
+          <td>This is the resource that is being returned from the database.</td>
+          <td>array of objects</td>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>The ID of the word.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>word</td>
+          <td>The word.</td>
+          <td>string</td>
+        </tr>
+        <tr>
+          <td>num_chars</td>
+          <td>The number characters in the word.</td>
+          <td>integer</td>
+        </tr>
+        <tr>
+          <td>topic</td>
+          <td>The topic or group that the word belongs to. Will only contain "Months", "States", or "Games".</td>
+          <td>string</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div><!-- end main -->
+  </div><!-- end grid container -->
+  </div><!-- end container -->
+
+  <footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="https://www.projectgamesapi.xyz/documentation.html">Documentation</a>&nbsp; | &nbsp;
+            <a href="https://www.projectgamesapi.xyz/examples.html">Examples</a>&nbsp; | &nbsp;
+            <a href="https://www.projectgamesapi.xyz/about.html">About</a>
+        </div>
+        <p class="copyright">Copyright © 2022 Project Games API</p>
+    </div>
+</footer>
+
+  <script src="https://www.projectgamesapi.xyz/scripts/docs-script.js"></script>
+  
+</body>
+</html>

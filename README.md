@@ -1,4 +1,4 @@
-# Project Games API - Back End
+# Project Games API - Front End
 This is the front end for Project Games API, including documentation and examples for users.
 
 # Live Website
